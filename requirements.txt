@@ -6,4 +6,3 @@ flask_bootstrap
 numpy
 lyricsgenius
 spacy
-re
