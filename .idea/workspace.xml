@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add migrations">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add SECRET_KEY for Flask app">
       <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
@@ -65,7 +65,8 @@
       <change afterPath="$PROJECT_DIR$/temp_lemmas.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArtistScore.db" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistScore.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710086032441</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Add SECRET_KEY for Flask app">
+      <created>1710086564332</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1710086564332</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -286,6 +294,7 @@
     <MESSAGE value="Handle DB migration to Postgresql" />
     <MESSAGE value="Delete migrations" />
     <MESSAGE value="Add migrations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add migrations" />
+    <MESSAGE value="Add SECRET_KEY for Flask app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SECRET_KEY for Flask app" />
   </component>
 </project>

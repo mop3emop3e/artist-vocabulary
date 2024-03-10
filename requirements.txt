@@ -5,7 +5,13 @@ wtforms
 flask_bootstrap
 numpy
 lyricsgenius
-spacy
+spacy==3.7.4
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.0.0/fr_core_news_sm-3.0.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.0.0/de_core_news_sm-3.0.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.0.0/es_core_news_sm-3.0.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/it_core_news_sm-3.0.0/it_core_news_sm-3.0.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/ru_core_news_sm-3.0.0/ru_core_news_sm-3.0.0.tar.gz
 gunicorn==21.2.0
 psycopg2-binary==2.9.9
 flask_migrate
