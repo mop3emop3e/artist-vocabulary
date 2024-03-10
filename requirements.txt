@@ -6,3 +6,4 @@ flask_bootstrap
 numpy
 lyricsgenius
 spacy
+gunicorn=21.2.0

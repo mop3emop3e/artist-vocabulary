@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add requrements.txt for deployment.">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Remove re from requirements.txt">
       <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
@@ -64,7 +64,7 @@
       <change afterPath="$PROJECT_DIR$/best_selling_artists.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/temp_lemmas.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "last_opened_file_path": "C:/Users/chech/PycharmProjects/python_m/01/95",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -155,7 +155,28 @@
       <option name="project" value="LOCAL" />
       <updated>1710077784169</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Remove os from requirements.txt">
+      <created>1710077906468</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710077906468</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Remove threading from requirements.txt">
+      <created>1710078009404</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710078009404</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Remove re from requirements.txt">
+      <created>1710078074602</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710078074602</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,6 +194,9 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Remove lives for debugging in helpers.py (save raw lyrics to file and save lemmas to file)" />
     <MESSAGE value="Add requrements.txt for deployment." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add requrements.txt for deployment." />
+    <MESSAGE value="Remove os from requirements.txt" />
+    <MESSAGE value="Remove threading from requirements.txt" />
+    <MESSAGE value="Remove re from requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove re from requirements.txt" />
   </component>
 </project>
