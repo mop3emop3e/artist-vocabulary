@@ -166,7 +166,7 @@ def home():
 
 
 # Check if DB exists. Create new one if not
-check_and_create_db()
+# check_and_create_db()
 
 if __name__ == '__main__':
     app.run(debug=True)
