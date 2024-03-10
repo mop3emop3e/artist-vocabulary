@@ -1,0 +1,16 @@
+[buildpack]
+name = "Python"
+
+[publish.Ignore]
+files = [
+  ".github/",
+  "builds/",
+  "spec/",
+  ".gitignore",
+  ".rubocop.yml",
+  "Gemfile",
+  "Gemfile.lock",
+  "hatchet.json",
+  "hatchet.lock",
+  "Makefile",
+]

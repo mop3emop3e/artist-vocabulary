@@ -1,7 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="" />
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Aerosmith_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backstreet Boys_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Barbra Streisand_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Beyoncé_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Billy Joel_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bon Jovi_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Britney Spears_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bruce Springsteen_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bruno Mars_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Celine Dion_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Chris Brown_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Coldplay_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Drake_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eagles_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ed Sheeran_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Elton John_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Elvis Presley_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eminem_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eric Clapton_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frank Sinatra_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Garth Brooks_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/George Strait_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Guns N' Roses_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Janet Jackson_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Jay-Z_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Journey_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Justin Bieber_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kanye West_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Katy Perry_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kenny Rogers_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lady Gaga_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Led Zeppelin_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lil Wayne_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Linkin Park_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Madonna_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mariah Carey_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Maroon 5_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Metallica_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Michael Jackson_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Neil Diamond_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nicki Minaj_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Paul McCartney_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Phil Collins_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pink Floyd_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pink_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Prince_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Queen_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Red Hot Chili Peppers_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rihanna_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rod Stewart_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shania Twain_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Taylor Swift_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/The Beatles_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/The Rolling Stones_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/U2_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Whitney Houston_temp_lyrics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/best_selling_artists.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/buildpack.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp_lemmas.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,10 +95,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "C:/Users/chech/PycharmProjects/python_m/01/95/main.py",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PythonContentEntriesConfigurable"
+    "last_opened_file_path": "C:/Users/chech/PycharmProjects/python_m/01/95",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chech\PycharmProjects\python_m\01\95" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="95" />
@@ -65,6 +137,14 @@
       <option name="presentableId" value="Default" />
       <updated>1709332558468</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1710075484583</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710075484583</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,5 +157,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>
