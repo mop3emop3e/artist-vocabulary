@@ -7,6 +7,19 @@ import os
 CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
 
 
+def download_spacy_models():
+    models = [
+        "en_core_web_sm",
+        "fr_core_news_sm",
+        "de_core_news_sm",
+        "es_core_news_sm",
+        "it_core_news_sm",
+        "ru_core_news_sm"
+    ]
+    for model in models:
+        spacy.cli.download(model)
+
+
 def get_artist_score(artist_name, language='en', max_songs=None):
     """
     Get number of unique words used by artists in all songs
@@ -138,3 +151,6 @@ def get_artist_score(artist_name, language='en', max_songs=None):
     # Otherwise it's sad
     else:
         return "Artist not found"
+
+
+download_spacy_models()
