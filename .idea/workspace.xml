@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Remove creation of SQLlite DB">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Replace 'postgres://' with 'postgresql://' in DATABASE_URL (looks like known bug.">
       <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
@@ -66,6 +66,7 @@
       <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710082477293</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Replace 'postgres://' with 'postgresql://' in DATABASE_URL (looks like known bug.">
+      <created>1710083542036</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710083542036</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +245,7 @@
     <MESSAGE value="== instead of = in requirements.txt." />
     <MESSAGE value="Add packages and modify code to use Postgres DB." />
     <MESSAGE value="Remove creation of SQLlite DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove creation of SQLlite DB" />
+    <MESSAGE value="Replace 'postgres://' with 'postgresql://' in DATABASE_URL (looks like known bug." />
+    <option name="LAST_COMMIT_MESSAGE" value="Replace 'postgres://' with 'postgresql://' in DATABASE_URL (looks like known bug." />
   </component>
 </project>

@@ -4,6 +4,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FieldList, SelectField, FormField
 from wtforms.validators import DataRequired, Optional
 from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
 from helpers import *
 import threading
 import numpy as np
@@ -16,7 +17,6 @@ app = Flask(__name__)
 # Connect to Database
 # Struggle with home directory for DB
 basedir = os.path.abspath(os.path.dirname(__file__))
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'ArtistScore.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///' + os.path.join(basedir, 'ArtistScore.db'))
 if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
     app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
@@ -24,6 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY
 app.app_context()
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 Bootstrap(app)
 
 
