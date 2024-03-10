@@ -17,10 +17,9 @@ app = Flask(__name__)
 # Connect to Database
 # Struggle with home directory for DB
 basedir = os.path.abspath(os.path.dirname(__file__))
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///' + os.path.join(basedir, 'ArtistScore.db'))
-# if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
-#     app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://rrejrvgopgtqzj:0414d548e6589234620836f63b9aa219f3d05bb1fa2e14cd1827fc75d4700b2a@ec2-54-73-22-169.eu-west-1.compute.amazonaws.com:5432/d6aesjbbsk4ns4'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///' + os.path.join(basedir, 'ArtistScore.db'))
+if app.config['SQLALCHEMY_DATABASE_URI'].startswith('postgres://'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = app.config['SQLALCHEMY_DATABASE_URI'].replace('postgres://', 'postgresql://', 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY
 app.app_context()
