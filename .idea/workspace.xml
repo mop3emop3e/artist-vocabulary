@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="== instead of = in requirements.txt.">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add packages and modify code to use Postgres DB.">
       <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
@@ -64,8 +64,6 @@
       <change afterPath="$PROJECT_DIR$/best_selling_artists.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/temp_lemmas.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710079502130</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add packages and modify code to use Postgres DB.">
+      <created>1710082207201</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1710082207201</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,6 +219,7 @@
     <MESSAGE value="Remove re from requirements.txt" />
     <MESSAGE value="Include gunicorn=21.2.0 to requirements.txt. Create Procfile to let heroku know how to deal with Flask app." />
     <MESSAGE value="== instead of = in requirements.txt." />
-    <option name="LAST_COMMIT_MESSAGE" value="== instead of = in requirements.txt." />
+    <MESSAGE value="Add packages and modify code to use Postgres DB." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add packages and modify code to use Postgres DB." />
   </component>
 </project>

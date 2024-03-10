@@ -150,19 +150,19 @@ def home():
                            message=message)
 
 
-def check_and_create_db():
-    """
-    Check if DB exists, create it if not
-    """
-
-    # Create an application context
-    with app.app_context():
-
-        # Check if DB file exists
-        if not os.path.exists(os.path.join(basedir, 'ArtistScore.db')):
-
-            # Create DB and tables
-            db.create_all()
+# def check_and_create_db():
+#     """
+#     Check if DB exists, create it if not
+#     """
+#
+#     # Create an application context
+#     with app.app_context():
+#
+#         # Check if DB file exists
+#         if not os.path.exists(os.path.join(basedir, 'ArtistScore.db')):
+#
+#             # Create DB and tables
+#             db.create_all()
 
 
 # Check if DB exists. Create new one if not
