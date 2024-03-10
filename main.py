@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-import os
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FieldList, SelectField, FormField
 from wtforms.validators import DataRequired, Optional

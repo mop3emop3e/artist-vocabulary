@@ -1,6 +1,5 @@
 from lyricsgenius import Genius
 import spacy
-from requests.exceptions import HTTPError, Timeout
 import re
 import os
 

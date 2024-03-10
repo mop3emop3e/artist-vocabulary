@@ -4,7 +4,6 @@ import csv
 import pandas as pd
 import re
 
-
 csv_file_path = './best_selling_artists.csv'
 
 data = pd.read_csv(csv_file_path)
