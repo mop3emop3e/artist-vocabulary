@@ -1,7 +1,6 @@
 flask
 flask_sqlalchemy
 flask_wtf
-os
 wtforms
 flask_bootstrap
 threading
