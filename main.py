@@ -72,7 +72,8 @@ def launch_calculation_and_store_to_db(artist_name, language='en', max_songs=Non
 
     # Update data in db with calculated score
     with app.app_context():
-        new_artist.score = score  # Update the score of the already existing object
+        new_artist.score = score
+        db.session.merge(new_artist)  # Optional, helps ensure the session is aware
         db.session.commit()
 
 
@@ -163,24 +164,6 @@ def home():
                            bin_labels=bin_labels,
                            message=message)
 
-
-# def check_and_create_db():
-#     """
-#     Check if DB exists, create it if not
-#     """
-#
-#     # Create an application context
-#     with app.app_context():
-#
-#         # Check if DB file exists
-#         if not os.path.exists(os.path.join(basedir, 'ArtistScore.db')):
-#
-#             # Create DB and tables
-#             db.create_all()
-
-
-# Check if DB exists. Create new one if not
-# check_and_create_db()
 
 if __name__ == '__main__':
     app.run(debug=True)
