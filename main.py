@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FieldList, SelectField, FormField
@@ -55,19 +55,24 @@ def launch_calculation_and_store_to_db(artist_name, language='en', max_songs=Non
     Launch score calculation and then store it to DB
     """
 
-    # Calculate score
-    score = get_artist_score(artist_name, language, max_songs)
-
-    # Update data in db
+    # Update data in db with new artist and sero score to avoid several searches for the same artist in parallel
     new_artist = ArtistScoreDB(
         name=artist_name,
         language=language,
-        score=score,
+        score=0,
     )
 
     # Push an application context to write new entry to db
     with app.app_context():
         db.session.add(new_artist)
+        db.session.commit()
+
+    # Calculate score
+    score = get_artist_score(artist_name, language, max_songs)
+
+    # Update data in db with calculated score
+    with app.app_context():
+        new_artist.score = score  # Update the score of the already existing object
         db.session.commit()
 
 
@@ -116,7 +121,8 @@ def home():
     # WTF form
     artist_score_form = ArtistScoreForm()
 
-    message = ''
+    # Get message
+    message = request.args.get('message', '')
 
     # If form is submitted
     if artist_score_form.validate_on_submit():
@@ -142,6 +148,9 @@ def home():
         # Clear the form
         artist_score_form.name.data = ''
         artist_score_form.language.data = 'en'
+
+        # Redirect to a new page (could be the same page)
+        return redirect(url_for('home', message=message))
 
     # Render index.html with data from DB
     return render_template('index.html',

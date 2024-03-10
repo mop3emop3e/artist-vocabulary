@@ -7,19 +7,6 @@ import os
 CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
 
 
-def download_spacy_models():
-    models = [
-        "en_core_web_sm",
-        "fr_core_news_sm",
-        "de_core_news_sm",
-        "es_core_news_sm",
-        "it_core_news_sm",
-        "ru_core_news_sm"
-    ]
-    for model in models:
-        spacy.cli.download(model)
-
-
 def get_artist_score(artist_name, language='en', max_songs=None):
     """
     Get number of unique words used by artists in all songs
@@ -75,7 +62,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
 
                 # Load the model for English language
-                nlp_en = spacy.load("en_core_web_sm")
+                try:
+                    nlp_en = spacy.load("en_core_web_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("en_core_web_sm")
+                    nlp_en = spacy.load("en_core_web_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_en.max_length = 5000000
@@ -86,7 +78,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
 
                 # Load the model for French language
-                nlp_fr = spacy.load("fr_core_news_sm")
+                try:
+                    nlp_fr = spacy.load("fr_core_news_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("fr_core_news_sm")
+                    nlp_fr = spacy.load("fr_core_news_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_fr.max_length = 5000000
@@ -97,7 +94,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
 
                 # Load the model for German language
-                nlp_de = spacy.load("de_core_news_sm")
+                try:
+                    nlp_de = spacy.load("de_core_news_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("de_core_news_sm")
+                    nlp_de = spacy.load("de_core_news_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_de.max_length = 5000000
@@ -108,7 +110,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
 
                 # Load the model for Spanish language
-                nlp_es = spacy.load("es_core_news_sm")
+                try:
+                    nlp_es = spacy.load("es_core_news_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("es_core_news_sm")
+                    nlp_es = spacy.load("es_core_news_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_es.max_length = 5000000
@@ -119,7 +126,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
 
                 # Load the model for Italian language
-                nlp_it = spacy.load("it_core_news_sm")
+                try:
+                    nlp_it = spacy.load("it_core_news_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("it_core_news_sm")
+                    nlp_it = spacy.load("it_core_news_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_it.max_length = 5000000
@@ -130,7 +142,12 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = re.sub(r'[^\u0400-\u04FF\s.,!?;:\-\'"()\\[\]]+', '', temp)
 
                 # Load the model for Russian language
-                nlp_ru = spacy.load("ru_core_news_sm")
+                try:
+                    nlp_ru = spacy.load("ru_core_news_sm")
+                except Exception as e:
+                    print(e)
+                    spacy.cli.download("ru_core_news_sm")
+                    nlp_ru = spacy.load("ru_core_news_sm")
 
                 # Increase maximum length of string for analysis
                 nlp_ru.max_length = 5000000
@@ -151,6 +168,3 @@ def get_artist_score(artist_name, language='en', max_songs=None):
     # Otherwise it's sad
     else:
         return "Artist not found"
-
-
-download_spacy_models()
