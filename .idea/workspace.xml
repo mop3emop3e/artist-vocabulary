@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Update SQLALCHEMY_DATABASE_URI update from 'postgres://' to 'postgresql://'">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add migrations">
       <change afterPath="$PROJECT_DIR$/ABBA_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/AC DC_temp_lyrics.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Adele_temp_lyrics.txt" afterDir="false" />
@@ -65,7 +65,7 @@
       <change afterPath="$PROJECT_DIR$/temp_lemmas.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Григорий Лепс_temp_lyrics.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArtistScore.db" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistScore.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +110,7 @@
       <envs>
         <env name="CLIENT_ACCESS_TOKEN" value="LnFlQYYFtk7RKqIv4qw0uGJY-Yis8EwzXbDYq9ujkGO3-xZ1BCt6HQJoVf8ZgK1V" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="SECRET_KEY" value="RT8RjCrB2ZHMXoFHsZgO8XMZrhrC1Iju" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -233,7 +234,28 @@
       <option name="project" value="LOCAL" />
       <updated>1710084865020</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Handle DB migration to Postgresql">
+      <created>1710085764640</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1710085764640</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Delete migrations">
+      <created>1710085933686</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710085933686</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add migrations">
+      <created>1710086032441</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1710086032441</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,6 +283,9 @@
     <MESSAGE value="Replace 'postgres://' with 'postgresql://' in DATABASE_URL (looks like known bug." />
     <MESSAGE value="Add flask_migrate to manage Postgresql database initializaiton." />
     <MESSAGE value="Update SQLALCHEMY_DATABASE_URI update from 'postgres://' to 'postgresql://'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update SQLALCHEMY_DATABASE_URI update from 'postgres://' to 'postgresql://'" />
+    <MESSAGE value="Handle DB migration to Postgresql" />
+    <MESSAGE value="Delete migrations" />
+    <MESSAGE value="Add migrations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add migrations" />
   </component>
 </project>

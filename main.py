@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -10,7 +12,7 @@ import threading
 import numpy as np
 
 # Set secret key, otherwise WTF form doesn't work
-SECRET_KEY = os.urandom(32)
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 app = Flask(__name__)
 
