@@ -1,0 +1,128 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<h1>Music vocabulary statistics</h1>
+
+<h1>{{ message }}</h1>
+
+<div class="container">
+    <div class="form">
+        {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+    </div>
+    <br>
+
+    <div class="row center-block text-center">
+        <div class="col-4">
+            <div class="row">
+                <h1>Winner</h1>
+            </div>
+            <div class="row">
+                <h1>{{ winner.name }}</h1>
+            </div>
+            <div class="row">
+                <h1>{{ winner.score }}</h1>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <h1>Average score</h1>
+            </div>
+            <div class="row">
+                <h1>{{ average_score }}</h1>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <h1>Loser</h1>
+            </div>
+            <div class="row">
+                <h1>{{ loser.name }}</h1>
+            </div>
+            <div class="row">
+                <h1>{{ loser.score }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="table">
+        <div class="row">
+            <div class="col-2">
+                Position
+            </div>
+            <div class="col-6">
+                Artist name
+            </div>
+            <div class="col-2">
+                Language
+            </div>
+            <div class="col-2">
+                Vocabulary score
+            </div>
+        </div>
+
+        {% if score_frequency %}
+
+            <div class="row">
+                <canvas id="histogramChart" width="600" height="200"></canvas>
+            </div>
+
+        {% endif %}
+
+        {% for artist in artist_score_list %}
+
+            <div class="row">
+                <div class="col-2">
+                    {{ artist.position }}
+                </div>
+                <div class="col-6">
+                    {{ artist.name }}
+                </div>
+                <div class="col-2">
+                    {{ artist.language }}
+                </div>
+                <div class="col-2">
+                    {{ artist.score }}
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+    // Flask template syntax to safely insert the data
+    const counts = {{ score_frequency|tojson }};
+    const binLabels = {{ bin_labels|tojson }};
+
+    const ctx = document.getElementById('histogramChart').getContext('2d');
+    const histogramChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: binLabels,
+            datasets: [{
+                label: 'Frequency',
+                data: counts,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% include "footer.html" %}
+{% endblock %}
