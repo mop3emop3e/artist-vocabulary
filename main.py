@@ -84,6 +84,10 @@ def home():
     # Get data from DB
     artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
 
+    for entry in db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all():
+        db.session.delete(entry)
+    db.session.commit()
+
     # Create list of artist and score
     artist_score_list = [
         {
@@ -164,17 +168,7 @@ def home():
                            bin_labels=bin_labels,
                            message=message)
 
-def delete_all_data():
-    # Reflect the tables
-    db.reflect()
-
-    # Loop through all tables and delete their contents
-    for table_name in reversed(db.metadata.sorted_tables):
-        db.session.execute(table_name.delete())
-    db.session.commit()
-
 
 if __name__ == '__main__':
     app.run(debug=True)
-    with app.app_context():
-        delete_all_data()
+
