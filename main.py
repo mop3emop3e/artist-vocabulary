@@ -164,6 +164,17 @@ def home():
                            bin_labels=bin_labels,
                            message=message)
 
+def delete_all_data():
+    # Reflect the tables
+    db.reflect()
+
+    # Loop through all tables and delete their contents
+    for table_name in reversed(db.metadata.sorted_tables):
+        db.session.execute(table_name.delete())
+    db.session.commit()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+    with app.app_context():
+        delete_all_data()

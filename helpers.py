@@ -153,7 +153,6 @@ def get_artist_score(artist_name, language='en', max_songs=None):
 
             # Calculate the unique lemmas
             lemmas.update([token.lemma_ for token in doc if token.is_alpha])
-            lemmas = set(lemmas)
 
         # FOR DEBUGGING
         # with open('./temp_lemmas.txt', 'w', encoding='utf-8') as file:
