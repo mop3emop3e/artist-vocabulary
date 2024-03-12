@@ -8,19 +8,58 @@ csv_file_path = './best_selling_artists.csv'
 
 data = pd.read_csv(csv_file_path)
 
-for index, row in data.iterrows():
-    print(row['Artist'], ' ', row['Country'])
-    if row['Country'] == 'France':
-        launch_calculation_and_store_to_db(row['Artist'], 'fr', 10000)
-    elif row['Country'] == 'Germany':
-        launch_calculation_and_store_to_db(row['Artist'], 'de', 10000)
-    elif row['Country'] == 'Italy':
-        launch_calculation_and_store_to_db(row['Artist'], 'it', 10000)
-    elif row['Country'] == 'Russia':
-        launch_calculation_and_store_to_db(row['Artist'], 'ru', 10000)
-    else:
-        launch_calculation_and_store_to_db(row['Artist'], 'en', 10000)
+# for index, row in data.iterrows():
+#     print(row['Artist'], ' ', row['Country'])
+#     if row['Country'] == 'France':
+#         launch_calculation_and_store_to_db(row['Artist'], 'fr', 10000)
+#     elif row['Country'] == 'Germany':
+#         launch_calculation_and_store_to_db(row['Artist'], 'de', 10000)
+#     elif row['Country'] == 'Italy':
+#         launch_calculation_and_store_to_db(row['Artist'], 'it', 10000)
+#     elif row['Country'] == 'Russia':
+#         launch_calculation_and_store_to_db(row['Artist'], 'ru', 10000)
+#     else:
+#         launch_calculation_and_store_to_db(row['Artist'], 'en', 10000)
 
+thread = []
+
+for index, row in data.iterrows():
+    if row['Country'] == 'France':
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'fr',
+                                                                                        10000)))
+        thread[-1].start()
+    elif row['Country'] == 'Germany':
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'de',
+                                                                                        10000)))
+        thread[-1].start()
+    elif row['Country'] == 'Italy':
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'it',
+                                                                                        10000)))
+        thread[-1].start()
+    elif row['Country'] == 'Spain':
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'es',
+                                                                                        10000)))
+        thread[-1].start()
+    elif row['Country'] == 'Russia':
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'ru',
+                                                                                        10000)))
+        thread[-1].start()
+    else:
+        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
+                                                                                        'en',
+                                                                                        10000)))
+        thread[-1].start()
+
+    while len(thread) >= 10:
+        for i in range(len(thread)):
+            if not thread[i].is_alive():
+                thread.pop(i)
+                break
 
 # csv_file_path = './best_selling_artists.csv'
 #

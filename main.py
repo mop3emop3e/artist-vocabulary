@@ -84,9 +84,10 @@ def home():
     # Get data from DB
     artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
 
-    for entry in db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all():
-        db.session.delete(entry)
-    db.session.commit()
+    # Delete all entries from DB FOR DEBUGGING
+    # for entry in db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all():
+    #     db.session.delete(entry)
+    # db.session.commit()
 
     # Create list of artist and score
     artist_score_list = [
