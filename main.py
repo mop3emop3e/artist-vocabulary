@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, jsonify, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, FieldList, SelectField, FormField
@@ -84,11 +84,6 @@ def home():
     # Get data from DB
     artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
 
-    # Delete all entries from DB FOR DEBUGGING
-    # for entry in db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all():
-    #     db.session.delete(entry)
-    # db.session.commit()
-
     # Create list of artist and score
     artist_score_list = [
         {
@@ -139,7 +134,7 @@ def home():
             # Run the score calculation in background
             thread = threading.Thread(target=launch_calculation_and_store_to_db, args=(artist_score_form.name.data,
                                                                                        artist_score_form.language.data,
-                                                                                       10000))
+                                                                                       100))
             thread.start()
 
             # Prepare the message
@@ -168,6 +163,48 @@ def home():
                            score_frequency=score_frequency,
                            bin_labels=bin_labels,
                            message=message)
+
+
+@app.route('/drop_db')
+def drop_db():
+    # Handle possible errors with try-except
+    try:
+        # Delete all entries from DB
+        db.session.query(ArtistScoreDB).delete()
+        db.session.commit()
+        return jsonify({'message': 'Database successfully cleared'}), 200
+    # If problems then it's not good
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/append_db', methods=['POST'])
+def append_db():
+
+    # Get data
+    data = request.json
+
+    # Try to get artists data from JSON
+    try:
+
+        # Add all entries to DB
+        for entry in data:
+            new_artist = ArtistScoreDB(
+                name=entry['name'],
+                language=entry['language'],
+                score=entry['score'],
+            )
+            db.session.add(new_artist)
+        db.session.commit()
+
+        # Return GOOD JOB message
+        return jsonify({'message': 'Data added successfully'}), 200
+
+    # If problems then let the remote user know
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == '__main__':
