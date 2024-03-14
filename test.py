@@ -5,22 +5,22 @@ import pandas as pd
 import re
 import time
 
+# import requests
+#
+# # Replace this URL with the actual URL where your Flask app is hosted
+# url = "http://www.morze.ch/drop_db"
+#
+# # Sending GET request to the Flask app
+# response = requests.get(url)
+#
+# # Printing the response from the server
+# print("Status Code:", response.status_code)
+# print("Response:", response.json())
+
+
 csv_file_path = './best_selling_artists.csv'
 
 data = pd.read_csv(csv_file_path)
-
-# for index, row in data.iterrows():
-#     print(row['Artist'], ' ', row['Country'])
-#     if row['Country'] == 'France':
-#         launch_calculation_and_store_to_db(row['Artist'], 'fr', 10000)
-#     elif row['Country'] == 'Germany':
-#         launch_calculation_and_store_to_db(row['Artist'], 'de', 10000)
-#     elif row['Country'] == 'Italy':
-#         launch_calculation_and_store_to_db(row['Artist'], 'it', 10000)
-#     elif row['Country'] == 'Russia':
-#         launch_calculation_and_store_to_db(row['Artist'], 'ru', 10000)
-#     else:
-#         launch_calculation_and_store_to_db(row['Artist'], 'en', 10000)
 
 thread = []
 
@@ -71,6 +71,11 @@ while len(thread) < 0:
             thread.pop(i)
             break
     time.sleep(5)
+
+
+
+
+
 
 # csv_file_path = './best_selling_artists.csv'
 #

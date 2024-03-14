@@ -40,8 +40,8 @@ def get_artist_score(artist_name, language='en', max_songs=None):
         lemmas = set()
 
         # FOR DEBUGGING
-        with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'w', encoding='utf-8') as file:
-            file.write('')
+        # with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'w', encoding='utf-8') as file:
+        #     file.write('')
 
         # Write all song lyrics to temp string
         for song in artist.songs:
@@ -53,8 +53,8 @@ def get_artist_score(artist_name, language='en', max_songs=None):
                 temp = song.lyrics
 
             # FOR DEBUGGING
-            with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'a', encoding='utf-8') as file:
-                file.write(f'{temp}\n')
+            # with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'a', encoding='utf-8') as file:
+            #     file.write(f'{temp}\n')
 
             # Regular expression to remove text within square brackets (tags like 'Chorus', 'Verse' etc.)
             temp = re.sub(r'\[.*?\]', '', temp)
@@ -159,9 +159,9 @@ def get_artist_score(artist_name, language='en', max_songs=None):
             lemmas.update([token.lemma_ for token in doc if token.is_alpha and token.pos_ != 'X'])
 
         # FOR DEBUGGING
-        with open('./temp_lemmas.txt', 'w', encoding='utf-8') as file:
-            for lemma in lemmas:
-                file.write(f'{lemma}\n')
+        # with open('./temp_lemmas.txt', 'w', encoding='utf-8') as file:
+        #     for lemma in lemmas:
+        #         file.write(f'{lemma}\n')
 
         # Return the count of unique lemmas
         return len(lemmas)
