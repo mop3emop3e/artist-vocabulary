@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Remove part for &quot;Delete all entries from db&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ArtistScore.db" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistScore.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-    </list>
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Add routs to drop db and append db. Limit the number of songs by 100 most." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -288,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710278987774</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Add routs to drop db and append db. Limit the number of songs by 100 most.">
+      <created>1710450431346</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1710450431346</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -325,6 +325,7 @@
     <MESSAGE value="Update lemmatization part to use less memory" />
     <MESSAGE value="Delete all entries from db" />
     <MESSAGE value="Remove part for &quot;Delete all entries from db&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove part for &quot;Delete all entries from db&quot;" />
+    <MESSAGE value="Add routs to drop db and append db. Limit the number of songs by 100 most." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add routs to drop db and append db. Limit the number of songs by 100 most." />
   </component>
 </project>
