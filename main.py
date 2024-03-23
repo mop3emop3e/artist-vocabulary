@@ -8,11 +8,13 @@ from flask_migrate import Migrate
 from helpers import *
 import threading
 import numpy as np
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Set secret key, otherwise WTF form doesn't work
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 app = Flask(__name__)
+executor = ThreadPoolExecutor(max_workers=1)  # Limit the number of concurrent tasks
 
 # Connect to Database
 # Struggle with home directory for DB
@@ -27,28 +29,25 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 Bootstrap(app)
 
+# Global variable for threads
+threads = []
+
 
 # score table configuration
 class ArtistScoreDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000), nullable=False)
-    language = db.Column(db.String(2), nullable=False)
+    language = db.Column(db.String(1000), nullable=False)
     score = db.Column(db.Integer, nullable=True)
 
 
 # WTF form
 class ArtistScoreForm(FlaskForm):
     name = StringField(label='Artist', validators=[DataRequired()])
-    language = SelectField('Language', choices=[('en', 'English'),
-                                                ('de', 'German'),
-                                                ('fr', 'French'),
-                                                ('es', 'Spanish'),
-                                                ('it', 'Italian'),
-                                                ('ru', 'Russian')])
     submit = SubmitField(label='Submit')
 
 
-def launch_calculation_and_store_to_db(artist_name, language='en', max_songs=None):
+def launch_calculation_and_store_to_db(artist_name, max_songs=None):
     """
     Launch score calculation and then store it to DB
     """
@@ -56,7 +55,7 @@ def launch_calculation_and_store_to_db(artist_name, language='en', max_songs=Non
     # Update data in db with new artist and sero score to avoid several searches for the same artist in parallel
     new_artist = ArtistScoreDB(
         name=artist_name,
-        language=language,
+        language='TBD',
         score=0,
     )
 
@@ -66,13 +65,27 @@ def launch_calculation_and_store_to_db(artist_name, language='en', max_songs=Non
         db.session.commit()
 
     # Calculate score
-    score = get_artist_score(artist_name, language, max_songs)
+    score = get_artist_score(artist_name, max_songs)
 
     # Update data in db with calculated score
     with app.app_context():
-        new_artist.score = score
-        db.session.merge(new_artist)  # Optional, helps ensure the session is aware
-        db.session.commit()
+        try:
+
+            # If score is not 0 then store to DB
+            if score['score'] != 0:
+                new_artist.score = int(score['score'])
+                new_artist.language = str(score['languages'])
+                db.session.merge(new_artist)  # Optional, helps ensure the session is aware
+                db.session.commit()
+
+            # If score is 0 then delete preliminary entry from DB
+            else:
+                db.session.delete(new_artist)
+                db.session.commit()
+        except Exception as e:
+            print(e)
+            db.session.delete(new_artist)
+            db.session.commit()
 
 
 # Root route
@@ -101,7 +114,8 @@ def home():
         average_score = int(sum(d['score'] for d in artist_score_list) / len(artist_score_list))
 
         # Calculate histogram
-        score_frequency, bin_edges = np.histogram([artist['score'] for artist in artist_score_list], bins=20)
+        score_frequency, bin_edges = np.histogram([artist['score'] for artist in artist_score_list],
+                                                  bins=max(10, len(artist_score_list) // 10))
         score_frequency = score_frequency.tolist()
 
         # Convert bin_edges to string labels for each bin
@@ -129,14 +143,13 @@ def home():
         # Check if artist is not already on db
         if artist_score_form.name.data not in [artist['name'] for artist in artist_score_list]:
 
-            # Run the score calculation in background
-            thread = threading.Thread(target=launch_calculation_and_store_to_db, args=(artist_score_form.name.data,
-                                                                                       artist_score_form.language.data,
-                                                                                       100))
-            thread.start()
+            # If not just couple of songs then run the score calculation in background
+            future = executor.submit(launch_calculation_and_store_to_db,
+                                     artist_score_form.name.data,
+                                     100)
 
             # Prepare the message
-            message = f'Processing {artist_score_form.name.data}, {artist_score_form.language.data}'
+            message = f'Processing {artist_score_form.name.data}..'
 
         # If artist is in db
         else:
@@ -146,7 +159,6 @@ def home():
 
         # Clear the form
         artist_score_form.name.data = ''
-        artist_score_form.language.data = 'en'
 
         # Redirect to a new page (could be the same page)
         return redirect(url_for('home', message=message))
@@ -190,7 +202,7 @@ def append_db():
         for entry in data:
             new_artist = ArtistScoreDB(
                 name=entry['name'],
-                language=entry['language'],
+                language=entry['languages'],
                 score=entry['score'],
             )
             db.session.add(new_artist)

@@ -4,119 +4,68 @@ import csv
 import pandas as pd
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# import requests
-#
-# # Replace this URL with the actual URL where your Flask app is hosted
-# url = "http://www.morze.ch/drop_db"
-#
-# # Sending GET request to the Flask app
-# response = requests.get(url)
-#
-# # Printing the response from the server
-# print("Status Code:", response.status_code)
-# print("Response:", response.json())
-
+# Maximum number opf threads
+MAX_THREADS = 10
 
 csv_file_path = './best_selling_artists.csv'
-
 data = pd.read_csv(csv_file_path)
 
-thread = []
+start_time = time.perf_counter()
 
-for index, row in data.iterrows():
-    if row['Country'] == 'France':
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'fr',
-                                                                                        100)))
-        thread[-1].start()
-    elif row['Country'] == 'Germany':
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'de',
-                                                                                        100)))
-        thread[-1].start()
-    elif row['Country'] == 'Italy':
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'it',
-                                                                                        100)))
-        thread[-1].start()
-    elif row['Country'] == 'Spain':
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'es',
-                                                                                        100)))
-        thread[-1].start()
-    elif row['Country'] == 'Russia':
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'ru',
-                                                                                        100)))
-        thread[-1].start()
-    else:
-        thread.append(threading.Thread(target=launch_calculation_and_store_to_db, args=(row['Artist'],
-                                                                                        'en',
-                                                                                        100)))
-        thread[-1].start()
+with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+    # Create a dictionary to hold future to row mapping
+    future_to_artist = {executor.submit(launch_calculation_and_store_to_db, row['Artist'], 100): row for index, row in data.iterrows()}
 
-    while len(thread) >= 10:
-        print(index)
-        for i in range(len(thread)):
-            if not thread[i].is_alive():
-                thread.pop(i)
-                break
-        time.sleep(5)
+    for future in as_completed(future_to_artist):
+        artist = future_to_artist[future]
+        try:
+            future.result()  # This would be useful if the function returns something or to catch exceptions
+        except Exception as e:
+            print(f'{artist["Artist"]} generated an exception: {e}')
 
-while len(thread) < 0:
-    print(len(thread))
-    for i in range(len(thread)):
-        if not thread[i].is_alive():
-            thread.pop(i)
-            break
-    time.sleep(5)
+duration = time.perf_counter() - start_time
+print(f'{duration} sec.')
 
-
-
-
-
-
-# csv_file_path = './best_selling_artists.csv'
+# import numpy as np
+# from scipy.optimize import curve_fit
+# import matplotlib.pyplot as plt
 #
-# data = pd.read_csv(csv_file_path)
 #
-# for index, row in data.iterrows():
+# with open('./Eminem_data.txt', 'r', encoding='utf-8') as file:
+#     raw_data = file.read()
 #
-#     print(row['Artist'], ' - ', row['Country'])
+# less_raw_data = raw_data.split('\n')
+# even_less_raw_data = [line.split(',')[-1].strip(' ') for line in less_raw_data]
+# cooked_data = [int(value) for value in even_less_raw_data if value != '']
+# print(cooked_data)
 #
-#     if row['Country'] in ['United Kingdom', 'United States', 'Canada', 'Australia', 'Jamaica', 'Barbados']:
+# # Example data: x_values as the number of songs analyzed, y_values as the cumulative number of unique lemmas
+# x_values = list(range(0, len(cooked_data)))
+# y_values = cooked_data
 #
-#         try:
-#             with open(f"./{row['Artist'].replace('/', ' ')}_temp_lyrics.txt", 'r', encoding='utf-8') as file:
-#                 temp = file.read()
 #
-#             # Regular expression to match text within square brackets
-#             temp = re.sub(r'\[.*?\]', '', temp)
+# # Define the logistic growth model
+# def logistic_growth(x, L_max, k, x_0):
+#     return L_max / (1 + np.exp(-k * (x - x_0)))
 #
-#             # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-#             temp = re.sub(r'[А-Яа-яЁё]+', ' ', temp)
 #
-#             # Load the model for English language
-#             nlp_en = spacy.load("en_core_web_sm")
-#             nlp_en.max_length = 5000000
-#             doc = nlp_en(temp)
+# # Fit the model to the data
+# popt, pcov = curve_fit(logistic_growth, x_values, y_values, maxfev=10000)
 #
-#             lemmas = [token.lemma_ for token in doc if token.is_alpha]
-#             unique_lemmas = set(lemmas)
+# # Extract the best-fitting parameters
+# L_max, k, x_0 = popt
 #
-#             # Update data in db
-#             new_artist = ArtistScoreDB(
-#                 name=row['Artist'],
-#                 language='en',
-#                 score=len(unique_lemmas),
-#             )
+# print(f"L_max: {L_max}, k: {k}, x_0: {x_0}")
 #
-#             # Push an application context to write new entry to db
-#             with app.app_context():
-#                 db.session.add(new_artist)
-#                 db.session.commit()
+# # Optional: Plot the data and the fitted curve
+# x_fit = np.linspace(min(x_values), max(x_values), 100)
+# y_fit = logistic_growth(x_fit, *popt)
 #
-#         except Exception as e:
-#             print(e)
-
+# plt.scatter(x_values, y_values, label='Data')
+# plt.plot(x_fit, y_fit, '-r', label='Fitted curve')
+# plt.legend()
+# plt.xlabel('Number of Songs Analyzed')
+# plt.ylabel('Cumulative Number of Unique Lemmas')
+# plt.show()

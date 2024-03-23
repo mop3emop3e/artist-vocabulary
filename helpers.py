@@ -2,12 +2,15 @@ from lyricsgenius import Genius
 import spacy
 import re
 import os
+from langdetect import detect
 
 # Access token for genius.com
 CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
 
 
-def get_artist_score(artist_name, language='en', max_songs=None):
+# def get_artist_score(artist_name, language='en', max_songs=None):
+def get_artist_score(artist_name, max_songs=None):
+
     """
     Get number of unique words used by artists in all songs
     :return: number of all unique words
@@ -29,7 +32,15 @@ def get_artist_score(artist_name, language='en', max_songs=None):
             artist = genius.search_artist(artist_name,
                                           max_songs=max_songs,
                                           sort='popularity')
-            break
+
+            # If some realistic number of songs exist then proceed with this artist
+            if artist:
+                if len(artist.songs) >= 20:
+                    break
+
+            return {
+                'score': 0
+            }
         except Exception as e:
             print(e)
 
@@ -40,8 +51,11 @@ def get_artist_score(artist_name, language='en', max_songs=None):
         lemmas = set()
 
         # FOR DEBUGGING
-        # with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'w', encoding='utf-8') as file:
+        # with open(f"./{artist_name.replace('/', ' ')}_data.txt", 'w', encoding='utf-8') as file:
         #     file.write('')
+
+        # Create empty list for languages
+        languages = []
 
         # Write all song lyrics to temp string
         for song in artist.songs:
@@ -52,119 +66,96 @@ def get_artist_score(artist_name, language='en', max_songs=None):
             except:
                 temp = song.lyrics
 
-            # FOR DEBUGGING
-            # with open(f"./{artist_name.replace('/', ' ')}_temp_lyrics.txt", 'a', encoding='utf-8') as file:
-            #     file.write(f'{temp}\n')
-
             # Regular expression to remove text within square brackets (tags like 'Chorus', 'Verse' etc.)
             temp = re.sub(r'\[.*?\]', '', temp)
 
             # Create empty list for words
             doc = []
 
+            # Detect language
+            languages.append(detect(temp))
+
             # Launch tokenization depending on language
-            match language:
-                case 'en':
+            if languages[-1] in ['en', 'fr', 'de', 'it', 'es', 'ru', 'ua']:
+                match languages[-1]:
+                    case 'en':
 
-                    # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-                    temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
+                        # Load the model for English language
+                        try:
+                            nlp = spacy.load("en_core_web_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("en_core_web_sm")
+                            nlp = spacy.load("en_core_web_sm")
 
-                    # Load the model for English language
-                    try:
-                        nlp_en = spacy.load("en_core_web_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("en_core_web_sm")
-                        nlp_en = spacy.load("en_core_web_sm")
+                    case 'fr':
 
-                    # Increase maximum length of string for analysis
-                    doc = nlp_en(temp)
-                case 'fr':
+                        # Load the model for French language
+                        try:
+                            nlp = spacy.load("fr_core_news_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("fr_core_news_sm")
+                            nlp = spacy.load("fr_core_news_sm")
 
-                    # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-                    temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
+                    case 'de':
 
-                    # Load the model for French language
-                    try:
-                        nlp_fr = spacy.load("fr_core_news_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("fr_core_news_sm")
-                        nlp_fr = spacy.load("fr_core_news_sm")
+                        # Load the model for German language
+                        try:
+                            nlp = spacy.load("de_core_news_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("de_core_news_sm")
+                            nlp = spacy.load("de_core_news_sm")
 
-                    # Increase maximum length of string for analysis
-                    doc = nlp_fr(temp)
-                case 'de':
+                    case 'es':
 
-                    # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-                    temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
+                        # Load the model for Spanish language
+                        try:
+                            nlp = spacy.load("es_core_news_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("es_core_news_sm")
+                            nlp = spacy.load("es_core_news_sm")
 
-                    # Load the model for German language
-                    try:
-                        nlp_de = spacy.load("de_core_news_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("de_core_news_sm")
-                        nlp_de = spacy.load("de_core_news_sm")
+                    case 'it':
 
-                    # Increase maximum length of string for analysis
-                    doc = nlp_de(temp)
-                case 'es':
+                        # Load the model for Italian language
+                        try:
+                            nlp = spacy.load("it_core_news_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("it_core_news_sm")
+                            nlp = spacy.load("it_core_news_sm")
 
-                    # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-                    temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
+                    case 'ru' | 'ua':
 
-                    # Load the model for Spanish language
-                    try:
-                        nlp_es = spacy.load("es_core_news_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("es_core_news_sm")
-                        nlp_es = spacy.load("es_core_news_sm")
+                        # Load the model for Russian language
+                        try:
+                            nlp = spacy.load("ru_core_news_sm")
+                        except Exception as e:
+                            print(e)
+                            spacy.cli.download("ru_core_news_sm")
+                            nlp = spacy.load("ru_core_news_sm")
 
-                    # Increase maximum length of string for analysis
-                    doc = nlp_es(temp)
-                case 'it':
+                # Increase maximum length of string for analysis
+                doc = nlp(temp)
 
-                    # Regular expression to remove Cyrillic characters but keep Latin characters, including those with diacritics
-                    temp = re.sub(r'[А-Яа-яЁё]+', '', temp)
+                # Calculate the unique lemmas
+                lemmas.update([token.lemma_ for token in doc if token.is_alpha and token.pos_ != 'X'])
 
-                    # Load the model for Italian language
-                    try:
-                        nlp_it = spacy.load("it_core_news_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("it_core_news_sm")
-                        nlp_it = spacy.load("it_core_news_sm")
+                # FOR DEBUGGING
+                # with open(f"./{artist_name.replace('/', ' ')}_data.txt", 'a', encoding='utf-8') as file:
+                #     file.write(f'{song.title}, {languages[-1]}, {len(lemmas)}\n')
 
-                    # Increase maximum length of string for analysis
-                    doc = nlp_it(temp)
-                case 'ru':
-
-                    # Regular expression to match non-Cyrillic characters and replace them with nothing
-                    temp = re.sub(r'[^\u0400-\u04FF\s.,!?;:\-\'"()\\[\]]+', '', temp)
-
-                    # Load the model for Russian language
-                    try:
-                        nlp_ru = spacy.load("ru_core_news_sm")
-                    except Exception as e:
-                        print(e)
-                        spacy.cli.download("ru_core_news_sm")
-                        nlp_ru = spacy.load("ru_core_news_sm")
-
-                    # Increase maximum length of string for analysis
-                    doc = nlp_ru(temp)
-
-            # Calculate the unique lemmas
-            lemmas.update([token.lemma_ for token in doc if token.is_alpha and token.pos_ != 'X'])
-
-        # FOR DEBUGGING
-        # with open('./temp_lemmas.txt', 'w', encoding='utf-8') as file:
-        #     for lemma in lemmas:
-        #         file.write(f'{lemma}\n')
+            else:
+                del languages[-1]
 
         # Return the count of unique lemmas
-        return len(lemmas)
+        return {
+            'score': len(lemmas),
+            'languages': set(languages)
+        }
 
     # Otherwise it's sad
     else:
