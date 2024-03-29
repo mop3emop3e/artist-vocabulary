@@ -151,6 +151,9 @@ def get_artist_score(artist_name, max_songs=None):
             else:
                 del languages[-1]
 
+            # Delete loaded model from memory
+            del nlp
+
         # Return the count of unique lemmas
         return {
             'score': len(lemmas),

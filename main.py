@@ -214,34 +214,34 @@ def append_db():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/upload_db', methods=['GET', 'POST'])
-def upload_db():
-    artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
-
-    # Create list of artist and score
-    artist_score_list = [
-        {
-            'name': artist.name,
-            'language': artist.language,
-            'score': artist.score,
-        }
-        for artist in artist_score_list_raw
-    ]
-
-    data = []
-
-    for artist in artist_score_list:
-        data.append({
-                "name": artist['name'],
-                "language": artist['language'],
-                "score": artist['score']
-            })
-
-    response = requests.post('http://www.morze.ch/append_db', json=data)
-    print(response.status_code)
-    return redirect(url_for('home', message='DB uploaded'))
+# @app.route('/upload_db', methods=['GET', 'POST'])
+# def upload_db():
+#     artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
+#
+#     # Create list of artist and score
+#     artist_score_list = [
+#         {
+#             'name': artist.name,
+#             'language': artist.language,
+#             'score': artist.score,
+#         }
+#         for artist in artist_score_list_raw
+#     ]
+#
+#     data = []
+#
+#     for artist in artist_score_list:
+#         data.append({
+#                 "name": artist['name'],
+#                 "language": artist['language'],
+#                 "score": artist['score']
+#             })
+#
+#     response = requests.post('http://www.morze.ch/append_db', json=data)
+#     print(response.status_code)
+#     return redirect(url_for('home', message='DB uploaded'))
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 

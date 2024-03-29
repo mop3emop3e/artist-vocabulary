@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Decrease number of concurent workers from 5 to 1.">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ArtistScore.db" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistScore.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711726408384</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Decrease number of concurent workers from 5 to 1.">
+      <created>1711726667434</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1711726667434</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
