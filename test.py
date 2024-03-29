@@ -28,6 +28,13 @@ with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
 duration = time.perf_counter() - start_time
 print(f'{duration} sec.')
 
+
+
+
+# ==== APPROXIMATION OF LEMMAS CURVE =====
+
+
+
 # import numpy as np
 # from scipy.optimize import curve_fit
 # import matplotlib.pyplot as plt
@@ -69,3 +76,35 @@ print(f'{duration} sec.')
 # plt.xlabel('Number of Songs Analyzed')
 # plt.ylabel('Cumulative Number of Unique Lemmas')
 # plt.show()
+
+
+# ===== UPLOAD THE DB =====
+
+# Get data from DB
+with app.app_context():
+    artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
+
+# Create list of artist and score
+artist_score_list = [
+    {
+        'name': artist.name,
+        'languages': artist.language,
+        'score': artist.score,
+    }
+    for artist in artist_score_list_raw
+]
+
+data = {}
+
+for artist in artist_score_list:
+    data.update({
+        artist: {
+            'name': artist['name'],
+            'languages': artist['languages'],
+            'score': artist['score']
+        }
+    })
+
+print(data)
+
+# response = request.post('http://morze.ch/append_db', params=data)

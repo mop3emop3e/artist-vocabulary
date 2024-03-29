@@ -6,15 +6,15 @@ from wtforms.validators import DataRequired
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from helpers import *
-import threading
 import numpy as np
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import requests
 
 # Set secret key, otherwise WTF form doesn't work
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 app = Flask(__name__)
-executor = ThreadPoolExecutor(max_workers=1)  # Limit the number of concurrent tasks
+executor = ThreadPoolExecutor(max_workers=5)  # Limit the number of concurrent tasks
 
 # Connect to Database
 # Struggle with home directory for DB
@@ -28,9 +28,6 @@ app.app_context()
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 Bootstrap(app)
-
-# Global variable for threads
-threads = []
 
 
 # score table configuration
@@ -202,7 +199,7 @@ def append_db():
         for entry in data:
             new_artist = ArtistScoreDB(
                 name=entry['name'],
-                language=entry['languages'],
+                language=entry['language'],
                 score=entry['score'],
             )
             db.session.add(new_artist)
@@ -215,6 +212,33 @@ def append_db():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+
+
+# @app.route('/upload_db', methods=['GET', 'POST'])
+# def upload_db():
+#     artist_score_list_raw = db.session.query(ArtistScoreDB).order_by(ArtistScoreDB.score.desc()).all()
+#
+#     # Create list of artist and score
+#     artist_score_list = [
+#         {
+#             'name': artist.name,
+#             'language': artist.language,
+#             'score': artist.score,
+#         }
+#         for artist in artist_score_list_raw
+#     ]
+#
+#     data = []
+#
+#     for artist in artist_score_list:
+#         data.append({
+#                 "name": artist['name'],
+#                 "language": artist['language'],
+#                 "score": artist['score']
+#             })
+#
+#     response = requests.post('http://www.morze.ch/append_db', json=data)
+#     return redirect(url_for('home', message='DB uploaded'))
 
 
 if __name__ == '__main__':
