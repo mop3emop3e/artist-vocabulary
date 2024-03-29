@@ -35,7 +35,7 @@ def get_artist_score(artist_name, max_songs=None):
 
             # If some realistic number of songs exist then proceed with this artist
             if artist:
-                if len(artist.songs) >= 20:
+                if len(artist.songs) == 100:
                     break
 
             return {
