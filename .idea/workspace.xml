@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Delete &quot;concutent&quot; libraty from requirements.txt">
+    <list default="true" id="4a7eeb6f-a98e-4eb5-95e3-668cabf3e42f" name="Changes" comment="Update &quot;language&quot; field name.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArtistScore.db" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistScore.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711234400624</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Update &quot;language&quot; field name.">
+      <created>1711721638891</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1711721638891</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,7 +350,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove lives for debugging in helpers.py (save raw lyrics to file and save lemmas to file)" />
     <MESSAGE value="Add requrements.txt for deployment." />
     <MESSAGE value="Remove os from requirements.txt" />
     <MESSAGE value="Remove threading from requirements.txt" />
@@ -368,6 +374,7 @@
     <MESSAGE value="Add render_template import" />
     <MESSAGE value="Add new version with language detection" />
     <MESSAGE value="Delete &quot;concutent&quot; libraty from requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete &quot;concutent&quot; libraty from requirements.txt" />
+    <MESSAGE value="Update &quot;language&quot; field name." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update &quot;language&quot; field name." />
   </component>
 </project>
