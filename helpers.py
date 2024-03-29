@@ -59,11 +59,10 @@ def get_artist_score(artist_name, max_songs=None):
 
         # Write all song lyrics to temp string
         for song in artist.songs:
-
-            # Try to get rid of the 1st line since it's always some information and not the actual lyrics
             try:
                 temp = song.lyrics.split('\n', 1)[1]
-            except:
+            except Exception as e:
+                print(e)
                 temp = song.lyrics
 
             # Regular expression to remove text within square brackets (tags like 'Chorus', 'Verse' etc.)
@@ -80,66 +79,69 @@ def get_artist_score(artist_name, max_songs=None):
                 match languages[-1]:
                     case 'en':
 
-                        # Load the model for English language
+                        # Load the model for English language and tokenize text
                         try:
-                            nlp = spacy.load("en_core_web_sm")
+                            doc = nlp_en(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("en_core_web_sm")
-                            nlp = spacy.load("en_core_web_sm")
+                            nlp_en = spacy.load("en_core_web_sm")
+                            doc = nlp_en(temp)
 
                     case 'fr':
 
-                        # Load the model for French language
+                        # Load the model for French language and tokenize text
                         try:
-                            nlp = spacy.load("fr_core_news_sm")
+                            doc = nlp_fr(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("fr_core_news_sm")
-                            nlp = spacy.load("fr_core_news_sm")
+                            nlp_fr = spacy.load("fr_core_news_sm")
+                            doc = nlp_fr(temp)
 
                     case 'de':
 
-                        # Load the model for German language
+                        # Load the model for German language and tokenize text
                         try:
-                            nlp = spacy.load("de_core_news_sm")
+                            doc = nlp_de(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("de_core_news_sm")
-                            nlp = spacy.load("de_core_news_sm")
+                            nlp_de = spacy.load("de_core_news_sm")
+                            doc = nlp_de(temp)
 
                     case 'es':
 
-                        # Load the model for Spanish language
+                        # Load the model for Spanish language and tokenize text
                         try:
-                            nlp = spacy.load("es_core_news_sm")
+                            doc = nlp_es(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("es_core_news_sm")
-                            nlp = spacy.load("es_core_news_sm")
+                            nlp_es = spacy.load("es_core_news_sm")
+                            doc = nlp_es(temp)
 
                     case 'it':
 
-                        # Load the model for Italian language
+                        # Load the model for Italian language and tokenize text
                         try:
-                            nlp = spacy.load("it_core_news_sm")
+                            doc = nlp_it(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("it_core_news_sm")
-                            nlp = spacy.load("it_core_news_sm")
+                            nlp_it = spacy.load("it_core_news_sm")
+                            doc = nlp_it(temp)
 
                     case 'ru' | 'ua':
 
-                        # Load the model for Russian language
+                        # Load the model for Russian language and tokenize text
                         try:
-                            nlp = spacy.load("ru_core_news_sm")
+                            doc = nlp_ru(temp)
                         except Exception as e:
                             print(e)
                             spacy.cli.download("ru_core_news_sm")
-                            nlp = spacy.load("ru_core_news_sm")
-
-                # Increase maximum length of string for analysis
-                doc = nlp(temp)
+                            nlp_ru = spacy.load("ru_core_news_sm")
+                            doc = nlp_ru(temp)
 
                 # Calculate the unique lemmas
                 lemmas.update([token.lemma_ for token in doc if token.is_alpha and token.pos_ != 'X'])
@@ -151,9 +153,41 @@ def get_artist_score(artist_name, max_songs=None):
             else:
                 del languages[-1]
 
-            # Delete loaded model from memory
-            del nlp
-            print(f'processing {song} - {len(lemmas)}')
+            # Delete doc from memory
+            del doc
+
+            print(f'processing {song.title} - {len(lemmas)}')
+
+        # Get rid of language packages in memory
+        try:
+            del nlp_en
+        except Exception as e:
+            print(e)
+
+        try:
+            del nlp_fr
+        except Exception as e:
+            print(e)
+
+        try:
+            del nlp_de
+        except Exception as e:
+            print(e)
+
+        try:
+            del nlp_it
+        except Exception as e:
+            print(e)
+
+        try:
+            del nlp_es
+        except Exception as e:
+            print(e)
+
+        try:
+            del nlp_ru
+        except Exception as e:
+            print(e)
 
         # Return the count of unique lemmas
         return {
