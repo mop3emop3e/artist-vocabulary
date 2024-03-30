@@ -3,6 +3,7 @@ import spacy
 import re
 import os
 from langdetect import detect
+import gc
 
 # Access token for genius.com
 CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
@@ -158,7 +159,37 @@ def get_artist_score(artist_name, max_songs=None):
 
             print(f'processing {song.title} - {len(lemmas)}')
 
-        # Get rid of language packages in memory
+        # Get rid of unnecessary data in memory
+        try:
+            del artist_name
+        except Exception as e:
+            print(e)
+
+        try:
+            del max_songs
+        except Exception as e:
+            print(e)
+
+        try:
+            del genius
+        except Exception as e:
+            print(e)
+
+        try:
+            del artist
+        except Exception as e:
+            print(e)
+
+        try:
+            del song
+        except Exception as e:
+            print(e)
+
+        try:
+            del temp
+        except Exception as e:
+            print(e)
+
         try:
             del nlp_en
         except Exception as e:
@@ -188,6 +219,9 @@ def get_artist_score(artist_name, max_songs=None):
             del nlp_ru
         except Exception as e:
             print(e)
+
+        # Clear memory or something
+        gc.collect()
 
         # Return the count of unique lemmas
         return {

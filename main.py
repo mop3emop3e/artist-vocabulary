@@ -85,6 +85,9 @@ def launch_calculation_and_store_to_db(artist_name, max_songs=None):
             db.session.delete(new_artist)
             db.session.commit()
 
+    # Delete score variable
+    del score
+
     # Clear memory or something
     gc.collect()
 
