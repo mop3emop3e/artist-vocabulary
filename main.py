@@ -9,6 +9,7 @@ from helpers import *
 import numpy as np
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
+import gc
 
 # Set secret key, otherwise WTF form doesn't work
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -83,6 +84,9 @@ def launch_calculation_and_store_to_db(artist_name, max_songs=None):
             print(e)
             db.session.delete(new_artist)
             db.session.commit()
+
+    # Clear memory or something
+    gc.collect()
 
 
 # Root route
