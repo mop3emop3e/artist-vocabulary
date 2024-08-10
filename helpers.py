@@ -4,6 +4,7 @@ import re
 import os
 from langdetect import detect
 import gc
+import requests
 
 # Access token for genius.com
 CLIENT_ACCESS_TOKEN = os.environ.get('CLIENT_ACCESS_TOKEN')
@@ -34,9 +35,12 @@ def get_artist_score(artist_name, max_songs=None):
                                           max_songs=max_songs,
                                           sort='popularity')
 
+            # Get full name
+            artist_name = artist.name
+
             # If some realistic number of songs exist then proceed with this artist
             if artist:
-                if len(artist.songs) == 100:
+                if len(artist.songs) == 20:
                     break
 
             return {
@@ -161,11 +165,6 @@ def get_artist_score(artist_name, max_songs=None):
 
         # Get rid of unnecessary data in memory
         try:
-            del artist_name
-        except Exception as e:
-            print(e)
-
-        try:
             del max_songs
         except Exception as e:
             print(e)
@@ -225,6 +224,7 @@ def get_artist_score(artist_name, max_songs=None):
 
         # Return the count of unique lemmas
         return {
+            'artist': artist_name,
             'score': len(lemmas),
             'languages': set(languages)
         }
@@ -232,3 +232,4 @@ def get_artist_score(artist_name, max_songs=None):
     # Otherwise it's sad
     else:
         return "Artist not found"
+

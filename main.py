@@ -31,7 +31,7 @@ migrate = Migrate(app, db)
 Bootstrap(app)
 
 
-# score table configuration
+# Score table configuration
 class ArtistScoreDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000), nullable=False)
@@ -70,16 +70,18 @@ def launch_calculation_and_store_to_db(artist_name, max_songs=None):
         try:
 
             # If score is not 0 then store to DB
-            if score['score'] != 0:
-                new_artist.score = int(score['score'])
-                new_artist.language = str(score['languages'])
+            if score['score'] != 0 and db.session.query(ArtistScoreDB.id).filter_by(name=score['artist']).first():
+                db.new_artist.name = score['artist']
+                db.new_artist.language = str(score['languages'])
+                db.new_artist.score = int(score['score'])
                 db.session.merge(new_artist)  # Optional, helps ensure the session is aware
                 db.session.commit()
 
-            # If score is 0 then delete preliminary entry from DB
+            # If score is 0 then delete this artist
             else:
                 db.session.delete(new_artist)
                 db.session.commit()
+
         except Exception as e:
             print(e)
             db.session.delete(new_artist)
@@ -150,7 +152,7 @@ def home():
             # If not just couple of songs then run the score calculation in background
             future = executor.submit(launch_calculation_and_store_to_db,
                                      artist_score_form.name.data,
-                                     100)
+                                     20)
 
             # Prepare the message
             message = f'Processing {artist_score_form.name.data}..'
