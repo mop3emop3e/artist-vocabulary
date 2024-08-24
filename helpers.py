@@ -44,8 +44,11 @@ def get_artist_score(artist_name, max_songs=None):
                     break
 
             return {
-                'score': 0
+                'artist': artist_name,
+                'score': 0,
+                'languages': ''
             }
+
         except Exception as e:
             print(e)
 
