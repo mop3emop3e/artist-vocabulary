@@ -51,6 +51,11 @@ def get_artist_score(artist_name, max_songs=None):
 
         except Exception as e:
             print(e)
+            return {
+                'artist': artist_name,
+                'score': 0,
+                'languages': ''
+            }
 
     # If artist found
     if artist:
