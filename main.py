@@ -45,54 +45,102 @@ class ArtistScoreForm(FlaskForm):
     submit = SubmitField(label='Submit')
 
 
+# def launch_calculation_and_store_to_db(artist_name, max_songs=None):
+#     """
+#     Launch score calculation and then store it to DB
+#     """
+#
+#     # Update data in db with new artist and sero score to avoid several searches for the same artist in parallel
+#     new_artist = ArtistScoreDB(
+#         name=artist_name,
+#         language='TBD',
+#         score=0,
+#     )
+#
+#     # Push an application context to write new entry to db
+#     with app.app_context():
+#         db.session.add(new_artist)
+#         db.session.commit()
+#
+#     # Calculate score
+#     score = get_artist_score(artist_name, max_songs)
+#
+#     # Update data in db with calculated score
+#     with app.app_context():
+#         try:
+#
+#             # Get new artist from db
+#             new_artist = db.session.query(ArtistScoreDB.id).filter_by(name=score['artist']).first()
+#
+#             # If score is not 0 then store to DB
+#             if score['score'] != 0 and new_artist:
+#                 new_artist.name = score['artist']
+#                 new_artist.language = str(score['languages'])
+#                 new_artist.score = int(score['score'])
+#                 db.session.merge(new_artist)  # Optional, helps ensure the session is aware
+#                 db.session.commit()
+#
+#             # If score is 0 then delete this artist
+#             else:
+#                 db.session.delete(new_artist)
+#                 db.session.commit()
+#
+#         except Exception as e:
+#             print(e)
+#             db.session.delete(new_artist)
+#             db.session.commit()
+#
+#     # Delete score variable
+#     del score
+#
+#     # Clear memory or something
+#     gc.collect()
+
 def launch_calculation_and_store_to_db(artist_name, max_songs=None):
     """
     Launch score calculation and then store it to DB
     """
 
-    # Update data in db with new artist and sero score to avoid several searches for the same artist in parallel
-    new_artist = ArtistScoreDB(
-        name=artist_name,
-        language='TBD',
-        score=0,
-    )
-
-    # Push an application context to write new entry to db
-    with app.app_context():
-        db.session.add(new_artist)
-        db.session.commit()
-
-    # Calculate score
-    score = get_artist_score(artist_name, max_songs)
-
-    # Update data in db with calculated score
     with app.app_context():
         try:
 
-            # If score is not 0 then store to DB
-            if score['score'] != 0 and db.session.query(ArtistScoreDB.id).filter_by(name=score['artist']).first():
-                db.new_artist.name = score['artist']
-                db.new_artist.language = str(score['languages'])
-                db.new_artist.score = int(score['score'])
-                db.session.merge(new_artist)  # Optional, helps ensure the session is aware
-                db.session.commit()
+            # Add new artist with a temporary score to avoid parallel processing
+            new_artist = ArtistScoreDB(
+                name=artist_name,
+                language='TBD',
+                score=0,
+            )
+            db.session.add(new_artist)
+            db.session.commit()
 
-            # If score is 0 then delete this artist
+            # Calculate the score
+            score = get_artist_score(artist_name, max_songs)
+
+            # If the score is valid (non-zero) and this artist is not in DB yet, update the artist's entry
+            if score['score'] != 0 and not db.session.query(ArtistScoreDB.id).filter_by(name=score['artist']).first():
+                new_artist.name = score['artist']
+                new_artist.language = str(score['languages'])
+                new_artist.score = int(score['score'])
+                db.session.commit()
             else:
+
+                # If the score is zero or artist is already in DB, delete the artist entry
                 db.session.delete(new_artist)
                 db.session.commit()
 
         except Exception as e:
-            print(e)
-            db.session.delete(new_artist)
-            db.session.commit()
+
+            # Handle exceptions, ensuring the session doesn't hold invalid data
+            db.session.rollback()
+            print(f"Error processing artist {artist_name}: {e}")
+        finally:
+            db.session.close()
 
     # Delete score variable
     del score
 
     # Clear memory or something
     gc.collect()
-
 
 # Root route
 @app.route('/', methods=['GET', 'POST'])
@@ -252,5 +300,5 @@ def append_db():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
