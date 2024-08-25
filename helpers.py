@@ -171,6 +171,12 @@ def get_artist_score(artist_name, max_songs=None):
 
             print(f'processing {song.title} - {len(lemmas)}')
 
+        artist_data = {
+            'artist': artist_name,
+            'score': len(lemmas),
+            'languages': set(languages)
+        }
+
         # Get rid of unnecessary data in memory
         try:
             del max_songs
@@ -227,15 +233,26 @@ def get_artist_score(artist_name, max_songs=None):
         except Exception as e:
             print(e)
 
+        try:
+            del artist_name
+        except Exception as e:
+            print(e)
+
+        try:
+            del lemmas
+        except Exception as e:
+            print(e)
+
+        try:
+            del languages
+        except Exception as e:
+            print(e)
+
         # Clear memory or something
         gc.collect()
 
         # Return the count of unique lemmas
-        return {
-            'artist': artist_name,
-            'score': len(lemmas),
-            'languages': set(languages)
-        }
+        return artist_data
 
     # Otherwise it's sad
     else:

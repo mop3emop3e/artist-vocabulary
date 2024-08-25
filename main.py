@@ -85,11 +85,16 @@ def launch_calculation_and_store_to_db(artist_name, max_songs=None):
         finally:
             db.session.close()
 
-    # Delete score variable
-    del score
+    # Delete variables
+    try:
+        del score
+        del new_artist
+    except Exception as e:
+        print(e)
 
     # Clear memory or something
     gc.collect()
+
 
 # Root route
 @app.route('/', methods=['GET', 'POST'])
